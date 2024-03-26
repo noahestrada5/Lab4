@@ -142,20 +142,6 @@ var map = L.map('map', {
 
 
 
-states = L.geoJson.ajax("assets/data.geojson",{
-    pointToLayer: function (feature, x){
-      return L.circleMarker(x, {
-        color: '#ff7900',
-        opacity: 1,
-        weight: 2,
-        fillColor: '#ff7900',
-        fillOpacity: .6,
-        radius: calcRadius(feature.properties.estimate)
-      }) }});
-	
-var minValue = 1;
-var minRadius = 7;
-
 function calcRadius(val) {
         return 1.00 * Math.pow(val/minValue,0.5) * minRadius;
         }
