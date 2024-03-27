@@ -155,6 +155,11 @@ attribution: 'Data: US Bureau of the Census, Statistical Abstract of the United 
 onEachFeature: function (feature, layer) {
          layer.bindPopup(feature.properties.name + "<BR>" + feature.properties.estimate);
      },
+states = L.geoJson.ajax("assets/data.geojson",{
+attribution: 'Data: US Bureau of the Census, Statistical Abstract of the United States, Map: Noah Estrada',
+onEachFeature: function (feature, layer) {
+         layer.bindPopup(feature.properties.name + "<BR>" + feature.properties.estimate);
+     },
 
 pointToLayer: function (feature, x){
 return L.circleMarker(x, {
