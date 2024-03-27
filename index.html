@@ -150,7 +150,7 @@ states.addTo(map);
 
 
 
-states = L.geoJson.ajax("assests/data.geojson",{
+states = L.geoJson.ajax("assets/data.geojson",{
 attribution: 'Data: US Bureau of the Census, Statistical Abstract of the United States, Map: Noah Estrada',
 onEachFeature: function (feature, layer) {
          layer.bindPopup(feature.properties.name + "<BR>" + feature.properties.estimate);
