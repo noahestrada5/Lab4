@@ -156,8 +156,8 @@ onEachFeature: function (feature, layer) {
          layer.bindPopup(feature.properties.name + "<BR>" + feature.properties.estimate);
      },
 
-pointToLayer: function (feature, x){
-return L.circleMarker(x, {
+pointToLayer: function (feature, e){
+return L.circleMarker(e, {
 color: '#97E37C',
 opacity: 1,
 weight: 2,
