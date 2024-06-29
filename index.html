@@ -141,29 +141,44 @@ var map = L.map('map', {
 }).addTo(map);
 
 
-
 function calcRadius(val) {
         return 1.00 * Math.pow(val/minValue,0.5) * minRadius;
         }
 
 L.control.scale({position: 'bottomleft'}).addTo(map);
 
+
+
+
+
+ 
+states = L.geoJson.ajax("assets/data.geojson", {
+    attribution: 'Data: US Bureau of the Census, Statistical Abstract of the United States, Map: Noah Estrada',
+    pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, {
+            color: '#97E37C',
+            opacity: 1,
+            weight: 2,
+            fillColor: '#97E37C',
+            fillOpacity: 0.6,
+            radius: calcRadius(feature.properties.estimate)
+        }).on({
+            mouseover: function (e) {
+                this.setStyle({ color: 'blue', fillColor: 'blue' });
+            },
+            mouseout: function (e) {
+                this.setStyle({ color: '#97E37C', fillColor: '#97E37C' });
+            }
+        });
+    },
+    onEachFeature: function (feature, layer) {
+        layer.bindPopup(feature.properties.name + "<br>" + feature.properties.estimate);
+    }
+});
+
 states.addTo(map);
 
-
-
-states = L.geoJson.ajax("assets/data.geojson",{
-attribution: 'Data: US Bureau of the Census, Statistical Abstract of the United States, Map: Noah Estrada',
-onEachFeature: function (feature, layer) {
-         layer.bindPopup(feature.properties.name + "<BR>" + feature.properties.estimate);
-     },
-states = L.geoJson.ajax("assets/data.geojson",{
-attribution: 'Data: US Bureau of the Census, Statistical Abstract of the United States, Map: Noah Estrada',
-onEachFeature: function (feature, layer) {
-         layer.bindPopup(feature.properties.name + "<BR>" + feature.properties.estimate);
-     },
-
-pointToLayer: function (feature, x){
+pointToLayer = function (feature, x){
 return L.circleMarker(x, {
 color: '#97E37C',
 opacity: 1,
@@ -177,16 +192,13 @@ this.setStyle({color: 'blue',fillColor: 'blue'});
 },
 mouseout: function(e){
 this.setStyle({color:'#97E37C', fillColor: '#97E37C'});
-} })},});
+} })};
 var minValue = 1;
 var minRadius = 8;
 function calcRadius(val) {
 return 1.00 * Math.pow(val/minValue,.5) * minRadius;
 }
 states.addTo(map);
-//copying started here
-
-
 </script>
 
 
